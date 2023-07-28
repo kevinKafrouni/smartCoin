@@ -1,0 +1,560 @@
+:root{
+    --main-color:black;
+    --bg-color:#242424;
+    --sections-color:#333333;
+    --green-color:#3CB548;
+    --red-color:#A04242;
+
+    --gray-light:#8F8D8D;
+    --gray-dark:#676666;
+
+}
+
+body{
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+nav{
+    background-color: var(--main-color);
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+.hide-mobile{
+    display: none;
+}
+
+.links{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 5px;
+
+}
+.links a{
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--gray-light);
+}
+
+header{
+    width: 60%;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap: 2rem;
+    color: white;
+}
+
+
+.balance-overview{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 0.5rem;
+}
+
+.number-up{
+    color:var(--green-color) ;
+}
+.number-down{
+    color:var(--red-color) ;
+}
+
+.light-text{
+    color: #8F8D8D;
+}
+
+
+.account-overview{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.account-overview .overview{
+    width: 200px;
+    height: 200px;
+    background-color: var(--sections-color);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.account-overview .trend{
+
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    margin-top: 0.6rem;
+    margin-left: 0.6rem;
+}
+
+.account-overview .trend-up{
+    
+    background-color: var(--green-color);
+    
+}
+
+.account-overview .trend-down{
+    background-color: var(--red-color);
+}
+
+
+.account-overview .type-div{
+    display: flex;
+    justify-content: space-around;
+    font-weight: bold;
+}
+
+
+.section-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 0;
+    margin-top: 2rem;
+}
+hr{
+    width: 60%;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+.add-transaction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 70%;
+    background-color: var(--sections-color);
+    gap: 1.3rem;
+    border-radius: 6px;
+}
+.add-transaction svg{
+    border: 1px solid white;
+    border-radius: 12px;
+    padding: 0;
+}
+
+
+.transaction-record{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transaction-record .transaction-details{
+    line-height: 0.3rem;
+}
+
+.popup-window{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+.transaction-step{
+    width: 100%;
+    height: 76%;
+    background-color: var(--sections-color);
+    position: fixed;
+    bottom: 0;
+    padding-left: 1rem;
+}
+
+.transaction-type{
+    display: flex;
+    justify-content: center;
+    gap: 1.4rem;
+    align-items: center;
+    margin-left: -20px;
+    margin-top: 2rem;
+}
+
+.transaction-type button{
+    width: 140px;
+    height: 40px;
+    background-color: var(--gray-dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: auto;
+}
+
+.transaction-type .active-income-btn{
+    background-color: var(--green-color);
+    color: white;
+}
+
+.transaction-type .active-expense-btn{
+    background-color: var(--red-color);
+    color: white;
+}
+
+
+.categories{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.category{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #3CB548;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-category{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 28px;
+    border: 1px solid white;
+}
+
+.next-step{
+    margin-top: 1.4rem;
+    display: flex;
+    justify-content: space-around;
+    font-size: 22px;
+}
+
+.next-step button{
+    margin-top: 1.4rem;
+    background-color: transparent;
+    border: 0;
+    font-size: 22px;
+    
+} 
+.input-section{
+    line-height: 0;
+}
+.input-section span{
+    margin-left: 1rem;
+    font-size: 22px;
+}
+.input-section input, textarea{
+    background-color: var(--bg-color);
+    border-radius: 6px;
+    border: 0;
+    color: white;
+
+
+}
+.input-section input{
+    height: 40px;
+    width: 160px;
+    text-align: center;
+    font-size: 22px;
+}
+
+
+.amount-input button{
+    background-color: transparent;
+    font-size: 28px;
+    border: 0;
+    color: rgba(255,255,255,0.6);
+    position: absolute;
+}
+
+.amount-input .decrement-btn{
+    top: 248px;
+    left: 25px;
+}
+.amount-input .increment-btn{
+    top: 248px;
+    left: 145px;
+}
+
+
+.category-chosen{
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.category-logo{
+    width: 40px;
+    height: 40px;
+    background-color: var(--green-color);
+    border-radius:6px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chosen-category-logo{
+    width: 40px;
+    height: 40px;
+    background-color: var(--green-color);
+    border-radius:6px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chosen-category{
+    background-color: #A04242;
+}
+
+
+
+
+
+
+
+/*============================transaction-history.html=================*/
+
+.account-info{
+    line-height: 0.3rem;
+    text-align: center;
+}
+
+.header-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+}
+
+.right-side{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+    gap: 1.3rem;
+}
+
+
+
+.single-transaction .category-chosen{
+    gap: 0.3rem;
+}
+
+
+.day-balance{
+    background-color: var(--sections-color);
+    border-radius: 6px;
+    margin-bottom: 1.3rem;
+}
+.day-balance .header-info{
+    display: flex;
+    justify-content: space-between;
+    line-height: 0;
+    background-color: #4B4B4B;
+    border-radius: 6px;
+    padding-left: 0.4rem;
+    padding-bottom: 0.6rem;
+    height: 30px;
+
+}
+.day-balance .day-balance-detail{
+    display: flex;
+    gap: 0.3rem;
+    margin-right: 0.6rem;
+}
+
+.day-balance .single-transaction{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0.6rem;
+    padding-right: 0.8rem;
+}
+
+
+/*======================statistics.html===============================*/
+.stat-header{
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    gap: 1.2rem;
+}
+.stat-header select{
+    background-color: var(--sections-color);
+    color: white;
+    width: 80px;
+    height: 30px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+
+.select-type{
+
+    display: flex;
+    gap: 1.2rem;
+}
+
+.select-type h3{
+    color: var(--gray-light);
+    cursor: pointer;
+}
+.select-type .selected{
+    color: white;
+}
+
+
+#pieChart{
+    margin-top: 6rem;
+}
+
+
+
+/*===========================settings.html===============*/
+.logout-btn{
+    background-color: #A04242;
+    border-radius: 6px;
+    border: 0;
+    padding: 0.4rem;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    margin-top: 3rem;
+    margin-left: 0.8rem;
+}
+
+
+svg{
+    fill: white;
+}
+.setting{
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+}
+.setting h2{
+    font-size: 20px;
+    margin-top: 1.8rem;
+    
+}
+
+
+/*=============================login.html===========================*/
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: baseline;
+    margin-top: 1.4rem;
+    
+    
+}
+
+form input{
+    margin: auto;
+    margin-bottom: 1.8rem;
+    width: 80%;
+    height: 30px;
+    background-color: #333333;
+    color: white;
+    font-size: 20px;
+    border-radius: 6px;
+    border: 0;
+
+}
+form label{
+    margin-left: 2.2rem;
+}
+
+form button{
+    width: 80%;
+    height: 40px;
+    background-color: #3CB548;
+    border-radius: 6px;
+    border: 0;
+    margin: auto;
+}
+
+.form-end{
+    text-align: center;
+    margin-top: 1.9rem;
+
+}
+.form-end a{
+    color: var(--green-color);
+}
+/*=======================MEDIA=====================================*/
+/*=======================MEDIA=====================================*/
+
+
+@media screen and (min-width: 850px) {
+    nav{
+        background-color: var(--main-color);
+        width: 90px;
+        height: 100%;
+        position:fixed;
+        top:0;
+        left: 0;
+    }
+    
+.links{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 5px;
+    gap: 2rem;
+}
+
+main{
+    margin-left: 6rem;
+    width: 85%;
+}
+
+.links h3{
+    display: block;
+}
+.hide-mobile{
+    display: block;
+}
+.links svg{
+    margin: auto;
+}
+
+header{
+    display: none;
+}
+h1{
+    font-size: 2rem;
+}
+h2{
+    font-size: 1.8rem;
+}
+h3{
+    font-size: 1.4rem;
+}
+}
