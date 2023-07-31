@@ -27,17 +27,27 @@ titleOptions.forEach(title => {
 });
   });
   
+/*==========================change category logo======================*/
+  function handleImageChange(imageFileName) {
+    const selectedImage = document.getElementById('selected-logo');
+    selectedImage.src = 'category_options/' + imageFileName;
+    document.getElementById('select-logo').value=imageFileName;
+}
 
 
+/*=====================================================================*/
 
 const activate = (id)=>{
     if(id!="income"){
         document.getElementById("income-btn").setAttribute('class','')
-        document.getElementById("income-category").style.display="none" 
+        document.getElementById("income-category").style.display="none";
+        document.getElementById("category-type").value = "expenses"; 
 
     }else{
         document.getElementById("expense-btn").setAttribute('class','') 
-        document.getElementById("expense-category").style.display="none"
+        document.getElementById("expense-category").style.display="none";
+        document.getElementById("category-type").value = "income";
+        
     }
     document.getElementById(id+"-btn").setAttribute('class','active-'+id+'-btn')
     document.getElementById(id+"-category").style.display="flex"
@@ -83,4 +93,7 @@ colorPicker.addEventListener('input', (event) => {
 
 
 /*=================statistics.html=======================*/
+
+
+
 

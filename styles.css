@@ -8,6 +8,10 @@
     --gray-light:#8F8D8D;
     --gray-dark:#676666;
 
+
+    --color-red-light:hsl(346, 87%, 46%, 15%);
+    --color-green-light:hsl(156, 100%, 38%, 15%);
+
 }
 
 body{
@@ -261,6 +265,11 @@ hr{
 .input-section{
     line-height: 0;
 }
+.input-group{
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
 .input-section span{
     margin-left: 1rem;
     font-size: 22px;
@@ -323,6 +332,11 @@ hr{
     justify-content: center;
     align-items: center;
 }
+.chosen-category-logo img{
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}
 
 .chosen-category{
     background-color: #A04242;
@@ -331,9 +345,20 @@ hr{
 
 
 
+.select-logo-section{
+    width: 80%;
+    height: 100px;
+    overflow-x: auto;
+    display: flex;
+    justify-content: baseline;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
 
-
-
+.select-logo-section img{
+    width: 60px;
+    height: 60px;
+}
 /*============================transaction-history.html=================*/
 
 .account-info{
@@ -507,6 +532,27 @@ form button{
 .form-end a{
     color: var(--green-color);
 }
+.alert-message{
+    padding: 0.2rem 0.8rem;
+    margin-bottom: 0.2rem;
+    border-radius: 15px;
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.alert-message.error{
+    background-color:var(--color-red-light);
+    color: red;
+}
+.alert-message.success{
+    background-color: var(--color-green-light);
+    color: green;
+}
+
+
 /*=======================MEDIA=====================================*/
 /*=======================MEDIA=====================================*/
 

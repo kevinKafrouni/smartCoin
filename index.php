@@ -1,5 +1,8 @@
 <?php 
     require('partials/header.php');
+    if(!isset($_SESSION['user-id'])){
+        header('location:'.ROOT_URL.'login.php');
+    }
 ?>
     <main>
     <header>
@@ -168,32 +171,52 @@
             <h2>Add Category</h2>
             <div class="category-chosen">
                 <div class="chosen-category-logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28" fill="white"><path d="M652-416q25 0 44.5-19.5t19.5-45q0-25.5-19.5-44.5T652-544q-25 0-44.5 19T588-480.5q0 25.5 19.5 45T652-416ZM180-233v53-600 547Zm0 113q-23 0-41.5-18T120-180v-600q0-23 18.5-41.5T180-840h600q24 0 42 18.5t18 41.5v134h-60v-134H180v600h600v-133h60v133q0 24-18 42t-42 18H180Zm358-173q-34 0-54-20t-20-53v-227q0-34 20-53.5t54-19.5h270q34 0 54 19.5t20 53.5v227q0 33-20 53t-54 20H538Zm284-60v-253H524v253h298Z"/></svg>
-                </div>
+                <img src='category_options/approval_delegation.svg' id="selected-logo" >        
+            </div>
                 <h3 id="title">Stocks</h3>
             </div>
 
     </div>
+    <form action="logic/add-category-logic.php" method="post" >
+    <div class="input-group">
     <div class="input-section">
         <h3>Name</h3>
-        <input type="text" id="input-title" onchange="changetitle('title')">
+        <input type="text" id="input-title" onchange="changetitle('title')" name="category-name"> 
     </div>
     <div class="input-section">
         <h3>Color</h3>
         <div class="category-color">
-            <input type="color" id="color-picker">
+            <input type="color" id="color-picker" name="color">
           </div>
+          <input type="hidden" id="select-logo" name="select-logo" value="">
+          <input type="hidden" id="category-type" name="category-type" value="income">
     </div>
+    
+</div>
+    
     <div class="input-section">
         <h3>Logo</h3>
-        <textarea name="" id="" cols="40" rows="5"></textarea>
+        <div class="select-logo-section">
+        <?php
+            $imageFolder = 'category_options'; // Change this to the path of your image folder
+            $images = scandir($imageFolder);    
+            foreach ($images as $image) {
+                // Skip "." and ".." entries and only display image files
+                if ($image != '.' && $image != '..' && is_file($imageFolder . '/' . $image)) {
+                    echo '<img src="' . $imageFolder . '/' . $image . '" onclick="handleImageChange(\'' . $image . '\')" >';
+                }
+            }
+        ?>
+
+
+        </div>
     </div>
     
     <div class="next-step">
-        <button class="light-text" onclick="swap('add-category-section','transaction-step1')">Cancel</button>
-        <button style="color: white;" onclick="swap('add-category-section','transaction-step1')">Done</button>
+        <button type="button" class="light-text" onclick="swap('add-category-section','transaction-step1')">Cancel</button>
+        <button type="submit" name="submit" style="color: white;">Done</button>
     </div>
-
+        </form>
     </div>
 </div>
 </main>
