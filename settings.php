@@ -2,7 +2,7 @@
     require('partials/header.php');
 ?>
     <div class="header-section">
-        <a href="index.html"><h1><</h1></a>
+        <a href="index.php"><h1><</h1></a>
         <h2>account name</h2>
 </div>
 <div class="settings-section">

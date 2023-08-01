@@ -1,6 +1,6 @@
 <?php
 
-    require('config/constants.php')
+    require('config/database.php')
 ?>
 <!DOCTYPE html>
 <html lang="en">

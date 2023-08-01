@@ -92,6 +92,15 @@ colorPicker.addEventListener('input', (event) => {
 });
 
 
+
+const editCategory = (categoryName) => {
+    // Encode the category name in case it contains special characters
+    var encodedCategoryName = encodeURIComponent(categoryName);
+    window.location.href = "?category=" + encodedCategoryName;
+    Show('popup')
+}
+
+
 /*=================statistics.html=======================*/
 
 

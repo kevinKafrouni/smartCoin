@@ -4,10 +4,11 @@
         header('location:'.ROOT_URL.'login.php');
     }
 ?>
+<div class="phone-screen">
     <main>
     <header>
         <h4>account name</h4>
-        <a href="settings.html"><svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="30" fill="white"><path d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm92-270q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-60q-29 0-49.5-20.5T410-480q0-29 20.5-49.5T480-550q29 0 49.5 20.5T550-480q0 29-20.5 49.5T480-410Zm0-70Zm-44 340h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Z"/></svg></a>
+        <a href="settings.php"><svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="30" fill="white"><path d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm92-270q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-60q-29 0-49.5-20.5T410-480q0-29 20.5-49.5T480-550q29 0 49.5 20.5T550-480q0 29-20.5 49.5T480-410Zm0-70Zm-44 340h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Z"/></svg></a>
     </header>
 
     <section class="balance-overview">
@@ -28,7 +29,7 @@
 
     <div class="section-header">
         <h3>Statistics</h3>
-        <a href="statistics.html"><h3>Overview ></h3></a>
+        <a href="statistics.php"><h3>Overview ></h3></a>
     </div>
     <hr>
     <section class="account-overview">
@@ -56,7 +57,7 @@
 
     <div class="section-header">
         <h3>Transaction History</h3>
-        <a href="transaction-history.html"><h3>View All ></h3></a>
+        <a href="transaction-history.php"><h3>View All ></h3></a>
     </div>
     <hr>
 
@@ -101,36 +102,59 @@
     
 
 <div class="popup-window" id="popup" style="display: none;">
+
+
     <div class="transaction-step transaction-step1" id="transaction-step1">
         <div class="transaction-type">
         <button id="income-btn" class="active-income-btn" onclick="activate('income')">Income</button>
         <button id="expense-btn" class="" onclick="activate('expense')">Expense</button>
     </div>
     <h3>categories</h3>
-    
     <div class="categories" id="expense-category" style="display: none;">
-        <div class="category">car</div>
-        <div class="category">food</div>
-        <div class="category">house</div>
-        <div class="category">gym</div>
-        <div class="category">Clothes</div>
-        <div class="category">books</div>
+    <?php 
+        $expenses_categories_query="SELECT * FROM categories WHERE type='expenses'";
+        $expenses_categories = mysqli_query($connection,$expenses_categories_query);
+        while($expense_category = mysqli_fetch_assoc($expenses_categories)) :
+    ?>
+        <div class="category" style="background-color:<?=$expense_category['color']?>">
+            <img src="<?='category_options/'.$expense_category['logo']?>">
+            <div class="hidden-category-details">
+                <p><?=$expense_category['name']?></p>
+                <button>Select</button>
+                <button onclick="editCategory('<?=$expense_category['category-id']?>');">Edit</button>
+            </div>
+        </div>
+        <?php endwhile ?>
         <div class="add-category" onclick="swap('transaction-step1','add-category-section')">+</div>
     </div>
     <div class="categories" id="income-category" >
-        <div class="category">Pay</div>
-        <div class="category">gifts</div>
-        <div class="category">Stocks</div>
-        <div class="category">refunds</div>
+    <?php 
+        $income_categories_query="SELECT * FROM categories WHERE type='income'";
+        $income_categories = mysqli_query($connection,$income_categories_query);
+        while($income_category = mysqli_fetch_assoc($income_categories)) :
+    ?>
+        <div class="category" style="background-color:<?=$income_category['color']?>" >
+            <img src="<?='category_options/'.$income_category['logo']?>">
+            <div class="hidden-category-details">
+                <p><?=$income_category['name']?></p>
+                <button>Select</button>
+                <button onclick="editCategory('<?=$income_category['category-id']?>');">Edit</button>
+            </div>
+        </div>
+        <?php endwhile ?>
         <div class="add-category" onclick="swap('transaction-step1','add-category-section')">+</div>
     </div>
+    
     <div class="next-step">
         <button class="light-text" onclick="hide('popup')">Cancel</button>
         <button style="color: white;" onclick="swap('transaction-step1','transaction-step2')">Next</button>
     </div>
     </div>
 
+
+
     <div class="transaction-step transaction-step2" id="transaction-step2" style="display: none;">
+    <form>
         <div class="transaction-properties">
             <h2>Income</h2>
             <div class="category-chosen">
@@ -160,22 +184,51 @@
     </div>
     
     <div class="next-step">
-        <button class="light-text" onclick="hide('popup');swap('transaction-step2','transaction-step1')">Cancel</button>
-        <button style="color: white;">Done</button>
+        <button type="button" class="light-text" onclick="hide('popup');swap('transaction-step2','transaction-step1')">Cancel</button>
+        <button type="submit" style="color: white;">Done</button>
     </div>
     </div>
-
+    </form>
 
     <div class="transaction-step add-category-section" id="add-category-section" style="display: none;">
         <div class="transaction-properties">
-            <h2>Add Category</h2>
+            <?php if(isset($_GET['category'])):
+            $categoryId = $_GET['category'];
+            $query = "SELECT * FROM categories WHERE 'category-id'=$categoryId";
+            $Category = mysqli_query($connection,$query);
+            $selectedCategory = mysqli_fetch_assoc($Category);
+            ?>
+            <h2>Edit Category</h2>
             <div class="category-chosen">
-                <div class="chosen-category-logo">
-                <img src='category_options/approval_delegation.svg' id="selected-logo" >        
+                <div class="chosen-category-logo" style="background-color:<?=$selectedCategory['color']?>">
+                <img src='<?='category_options/'.$selectedCategory['logo']?>' id="selected-logo" >        
             </div>
-                <h3 id="title">Stocks</h3>
+                <h3 id="title"><?= $selectedCategory['name']?></h3>
             </div>
 
+    </div>
+    <form action="logic/add-category-logic.php" method="post" >
+    <div class="input-group">
+    <div class="input-section">
+        <h3>Name</h3>
+        <input type="text" id="input-title" onchange="changetitle('title')" name="category-name" value="<?=$selectedCategory['name']?>"> 
+    </div>
+    <div class="input-section">
+        <h3>Color</h3>
+        <div class="category-color">
+            <input type="color" id="color-picker" name="color" value="<?=$selectedCategory['color']?>">
+          </div>
+          <input type="hidden" id="select-logo" name="select-logo" value="<?=$selectedCategory['logo']?>">
+          <input type="hidden" id="category-type" name="category-type" value="<?=$selectedCategory['type']?>">
+    </div>
+    <?php else : ?>
+        <h2>Add Category</h2>
+            <div class="category-chosen">
+                <div class="chosen-category-logo">
+                <img src='category_options/group.svg' id="selected-logo" >        
+            </div>
+                <h3 id="title">name</h3>
+            </div>
     </div>
     <form action="logic/add-category-logic.php" method="post" >
     <div class="input-group">
@@ -191,9 +244,10 @@
           <input type="hidden" id="select-logo" name="select-logo" value="">
           <input type="hidden" id="category-type" name="category-type" value="income">
     </div>
+    <?php endif ?>
+    
     
 </div>
-    
     <div class="input-section">
         <h3>Logo</h3>
         <div class="select-logo-section">
@@ -213,7 +267,7 @@
     </div>
     
     <div class="next-step">
-        <button type="button" class="light-text" onclick="swap('add-category-section','transaction-step1')">Cancel</button>
+        <button type="button" class="light-text" onclick="swap('edit-category-section','transaction-step1')">Cancel</button>
         <button type="submit" name="submit" style="color: white;">Done</button>
     </div>
         </form>
@@ -223,5 +277,6 @@
 <?php 
 include('partials/navigation.php');
 ?>
+</div>
 </body>
 </html>
