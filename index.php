@@ -101,10 +101,10 @@
     </section>
     
 
-<div class="popup-window" id="popup" style="display: none;">
+<div class="popup-window" id="popup" style="display: <?php $_GET['status']='category'?'block':'none'; ?>none;">
 
 
-    <div class="transaction-step transaction-step1" id="transaction-step1">
+<div class="transaction-step transaction-step1" id="transaction-step1" style="height:72%;">
         <div class="transaction-type">
         <button id="income-btn" class="active-income-btn" onclick="activate('income')">Income</button>
         <button id="expense-btn" class="" onclick="activate('expense')">Expense</button>
@@ -125,7 +125,7 @@
             </div>
         </div>
         <?php endwhile ?>
-        <div class="add-category" onclick="swap('transaction-step1','add-category-section')">+</div>
+        <a href="add-category.php"><div class="add-category">+</div></a>
     </div>
     <div class="categories" id="income-category" >
     <?php 
@@ -137,140 +137,34 @@
             <img src="<?='category_options/'.$income_category['logo']?>">
             <div class="hidden-category-details">
                 <p><?=$income_category['name']?></p>
-                <button>Select</button>
-                <button onclick="editCategory('<?=$income_category['category-id']?>');">Edit</button>
+                <div class="forms-btns" style="display:flex;">
+                <form action="transaction-step2.php" method="post">
+                    <input type="hidden" name="id" value="<?=$income_category['category-id']?>">
+                    <input type="hidden" name="name" value="<?=$income_category['name']?>">
+                    <input type="hidden" name="color" value="<?=$income_category['color']?>">
+                    <input type="hidden" name="logo" value="<?=$income_category['logo']?>">
+                    <input type="hidden" name="type" value="income">
+                    <button type="submit">Select</button>
+                </form>
+
+                <form action="edit-category.php" method="post" class="btn-forms">
+                    <input type="hidden" name="id" value="<?=$income_category['category-id']?>">
+                    <input type="hidden" name="name" value="<?=$income_category['name']?>">
+                    <input type="hidden" name="color" value="<?=$income_category['color']?>">
+                    <input type="hidden" name="logo" value="<?=$income_category['logo']?>">
+                    <input type="hidden" name="type" value="income">
+                    <button type="submit">Edit</button>
+                </form>
+                </div>
             </div>
         </div>
         <?php endwhile ?>
-        <div class="add-category" onclick="swap('transaction-step1','add-category-section')">+</div>
+        <a href="add-category.php"><div class="add-category">+</div></a>
     </div>
     
     <div class="next-step">
         <button class="light-text" onclick="hide('popup')">Cancel</button>
-        <button style="color: white;" onclick="swap('transaction-step1','transaction-step2')">Next</button>
     </div>
-    </div>
-
-
-
-    <div class="transaction-step transaction-step2" id="transaction-step2" style="display: none;">
-    <form>
-        <div class="transaction-properties">
-            <h2>Income</h2>
-            <div class="category-chosen">
-                <div class="category-logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28" fill="white"><path d="M652-416q25 0 44.5-19.5t19.5-45q0-25.5-19.5-44.5T652-544q-25 0-44.5 19T588-480.5q0 25.5 19.5 45T652-416ZM180-233v53-600 547Zm0 113q-23 0-41.5-18T120-180v-600q0-23 18.5-41.5T180-840h600q24 0 42 18.5t18 41.5v134h-60v-134H180v600h600v-133h60v133q0 24-18 42t-42 18H180Zm358-173q-34 0-54-20t-20-53v-227q0-34 20-53.5t54-19.5h270q34 0 54 19.5t20 53.5v227q0 33-20 53t-54 20H538Zm284-60v-253H524v253h298Z"/></svg>
-                </div>
-                <h3>Stocks</h3>
-            </div>
-
-    </div>
-    <div class="input-section">
-        <h3>Date</h3>
-        <input type="date">
-    </div>
-    <div class="input-section">
-        <h3>Amount</h3>
-        <div class="amount-input">
-            <button class="decrement-btn" onclick="updateValue('decrement')">-</button>
-            <input type="number" class="amount-field" id="amount" value="0">
-            <button class="increment-btn" onclick="updateValue('increment')">+</button>
-            <span>$</span>
-          </div>
-    </div>
-    <div class="input-section">
-        <h3>Description</h3>
-        <textarea name="" id="" cols="40" rows="5"></textarea>
-    </div>
-    
-    <div class="next-step">
-        <button type="button" class="light-text" onclick="hide('popup');swap('transaction-step2','transaction-step1')">Cancel</button>
-        <button type="submit" style="color: white;">Done</button>
-    </div>
-    </div>
-    </form>
-
-    <div class="transaction-step add-category-section" id="add-category-section" style="display: none;">
-        <div class="transaction-properties">
-            <?php if(isset($_GET['category'])):
-            $categoryId = $_GET['category'];
-            $query = "SELECT * FROM categories WHERE 'category-id'=$categoryId";
-            $Category = mysqli_query($connection,$query);
-            $selectedCategory = mysqli_fetch_assoc($Category);
-            ?>
-            <h2>Edit Category</h2>
-            <div class="category-chosen">
-                <div class="chosen-category-logo" style="background-color:<?=$selectedCategory['color']?>">
-                <img src='<?='category_options/'.$selectedCategory['logo']?>' id="selected-logo" >        
-            </div>
-                <h3 id="title"><?= $selectedCategory['name']?></h3>
-            </div>
-
-    </div>
-    <form action="logic/add-category-logic.php" method="post" >
-    <div class="input-group">
-    <div class="input-section">
-        <h3>Name</h3>
-        <input type="text" id="input-title" onchange="changetitle('title')" name="category-name" value="<?=$selectedCategory['name']?>"> 
-    </div>
-    <div class="input-section">
-        <h3>Color</h3>
-        <div class="category-color">
-            <input type="color" id="color-picker" name="color" value="<?=$selectedCategory['color']?>">
-          </div>
-          <input type="hidden" id="select-logo" name="select-logo" value="<?=$selectedCategory['logo']?>">
-          <input type="hidden" id="category-type" name="category-type" value="<?=$selectedCategory['type']?>">
-    </div>
-    <?php else : ?>
-        <h2>Add Category</h2>
-            <div class="category-chosen">
-                <div class="chosen-category-logo">
-                <img src='category_options/group.svg' id="selected-logo" >        
-            </div>
-                <h3 id="title">name</h3>
-            </div>
-    </div>
-    <form action="logic/add-category-logic.php" method="post" >
-    <div class="input-group">
-    <div class="input-section">
-        <h3>Name</h3>
-        <input type="text" id="input-title" onchange="changetitle('title')" name="category-name"> 
-    </div>
-    <div class="input-section">
-        <h3>Color</h3>
-        <div class="category-color">
-            <input type="color" id="color-picker" name="color">
-          </div>
-          <input type="hidden" id="select-logo" name="select-logo" value="">
-          <input type="hidden" id="category-type" name="category-type" value="income">
-    </div>
-    <?php endif ?>
-    
-    
-</div>
-    <div class="input-section">
-        <h3>Logo</h3>
-        <div class="select-logo-section">
-        <?php
-            $imageFolder = 'category_options'; // Change this to the path of your image folder
-            $images = scandir($imageFolder);    
-            foreach ($images as $image) {
-                // Skip "." and ".." entries and only display image files
-                if ($image != '.' && $image != '..' && is_file($imageFolder . '/' . $image)) {
-                    echo '<img src="' . $imageFolder . '/' . $image . '" onclick="handleImageChange(\'' . $image . '\')" >';
-                }
-            }
-        ?>
-
-
-        </div>
-    </div>
-    
-    <div class="next-step">
-        <button type="button" class="light-text" onclick="swap('edit-category-section','transaction-step1')">Cancel</button>
-        <button type="submit" name="submit" style="color: white;">Done</button>
-    </div>
-        </form>
     </div>
 </div>
 </main>

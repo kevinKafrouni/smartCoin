@@ -25,6 +25,23 @@ titleOptions.forEach(title => {
     title.classList.add('selected');
   });
 });
+
+
+const editCategory = (categoryName) => {
+    // Encode the category name in case it contains special characters
+    var encodedCategoryName = encodeURIComponent(categoryName);
+    window.location.href = "edit-category.php?category=" + encodedCategoryName;
+    Show('popup');
+}
+
+const addTransaction = (categoryName) => {
+    // Encode the category name in case it contains special characters
+    var encodedCategoryName = encodeURIComponent(categoryName);
+    window.location.href = "transaction-step2.php?category=" + encodedCategoryName;
+    Show('popup');
+}
+
+
   });
   
 /*==========================change category logo======================*/
@@ -36,22 +53,25 @@ titleOptions.forEach(title => {
 
 
 /*=====================================================================*/
-
-const activate = (id)=>{
-    if(id!="income"){
-        document.getElementById("income-btn").setAttribute('class','')
-        document.getElementById("income-category").style.display="none";
-        document.getElementById("category-type").value = "expenses"; 
-
-    }else{
-        document.getElementById("expense-btn").setAttribute('class','') 
-        document.getElementById("expense-category").style.display="none";
-        document.getElementById("category-type").value = "income";
+const activate = (id) => {
+    const categories = ["income", "expense"];
+    categories.forEach(category => {
+        const categoryBtn = document.getElementById(category + "-btn");
+        const categoryDiv = document.getElementById(category + "-category");
         
-    }
-    document.getElementById(id+"-btn").setAttribute('class','active-'+id+'-btn')
-    document.getElementById(id+"-category").style.display="flex"
-}
+        if (category === id) {
+            categoryDiv.style.display = "flex";
+        } else {
+            categoryDiv.style.display = "none";
+        }
+
+        categoryBtn.classList.toggle("active-" + category + "-btn", category === id);
+    });
+
+    document.getElementById("category-type").value = id;
+};
+
+
 
 
 const hide = (id)=>{
@@ -92,13 +112,6 @@ colorPicker.addEventListener('input', (event) => {
 });
 
 
-
-const editCategory = (categoryName) => {
-    // Encode the category name in case it contains special characters
-    var encodedCategoryName = encodeURIComponent(categoryName);
-    window.location.href = "?category=" + encodedCategoryName;
-    Show('popup')
-}
 
 
 /*=================statistics.html=======================*/
