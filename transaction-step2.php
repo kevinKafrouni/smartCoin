@@ -42,44 +42,58 @@
         exit;
     }
 ?>
-
-<div class="transaction-step transaction-step2" id="transaction-step2">
-    <form>
+<div class="phone-screen">
+    <h1>Add Transaction</h1>
+    <div class="transaction">
+    <form action="logic/add-transaction-logic.php" method="post">
         <div class="transaction-properties">
             <h2><?=$type?></h2>
             <div class="category-chosen">
                 <div class="category-logo" style="background-color=<?=$color?>">
-                    <img src='<?='category_options/'.$logo?>' style='width=30px'>
+                    <img src='<?='category_options/'.$logo?>' style="width=70%">
                 </div>
                 <h3><?=$name?></h3>
             </div>
+            <input type="hidden" name="categoryId" value=<?=$id?>>
 
     </div>
     <div class="input-section">
         <h3>Date</h3>
-        <input type="date">
+        <input type="date" name="trdate" id="dateInput" value="<?=date('Y-m-d')?>">
     </div>
     <div class="input-section">
         <h3>Amount</h3>
         <div class="amount-input">
-            <button class="decrement-btn" onclick="updateValue('decrement')">-</button>
-            <input type="number" class="amount-field" id="amount" value="0">
-            <button class="increment-btn" onclick="updateValue('increment')">+</button>
+            <input type="number" name="amount" class="amount-field" id="amount" value="0">
             <span>$</span>
           </div>
     </div>
     <div class="input-section">
         <h3>Description</h3>
-        <textarea name="" id="" cols="40" rows="5"></textarea>
+        <textarea name="description" id="" cols="40" rows="5"></textarea>
     </div>
     
     <div class="next-step">
-        <button type="button" class="light-text" onclick="hide('popup');swap('transaction-step2','transaction-step1')">Cancel</button>
+        <a href="index.php"><button type="button" class="light-text">Cancel</button></a>
         <button type="submit" style="color: white;">Done</button>
     </div>
     </div>
     </form>
     </div>
+</div>
     <script src="js/main.js"></script>
+    <script>
+    const getTodayDateString = ()=> {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    // Set the default value of the date input to today's date
+    const dateInput = document.getElementById('dateInput');
+    dateInput.value = getTodayDateString();
+    </script>
 </body>
 </html>

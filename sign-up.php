@@ -8,7 +8,7 @@
     $checkpassword = $_SESSION['signup-data']['checkpassword'] ?? null;
     
 ?>
-
+<div class="phone-screen"> 
     <h2 style="text-align: center;">Create an account</h2>
     <?php if(isset($_SESSION['signup-err'])) : ?>
         <div class="alert-message error">
@@ -29,6 +29,7 @@
     </form>
     <div>
         <p class="form-end">Already Have an account ? <span><a href="login.php">Login</a></span></p>
+    </div>
     </div>
 </body>
 </html>

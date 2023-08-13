@@ -19,6 +19,12 @@
                 $db_password= $user['password'];
                 if(password_verify($password,$db_password)){
                     $_SESSION['user-id']= $user['user-id'];
+                    
+                    $uid = $user['user-id'];
+                    $accountquery = "SELECT `account-id` FROM accounts WHERE `user-id`='$uid' AND isactive='1'";
+                    $accounts = mysqli_query($connection,$accountquery);
+                    if($account = mysqli_fetch_row($accounts));
+                    $_SESSION['account-id']=$account[0];
                     header('location: '.ROOT_URL);
                     die();
                 }else{
