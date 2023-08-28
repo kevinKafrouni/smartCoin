@@ -138,6 +138,13 @@ hr{
     margin-top: 0;
 }
 
+.inline-btns{
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+    width: 100%;
+}
 .add-transaction{
     display: flex;
     justify-content: center;
@@ -608,6 +615,28 @@ form button{
     font-size: 1.4rem;
     font-weight: bold;
 }
+
+
+
+/*==============================about==================================*/
+
+.waviy {
+    position: relative;
+  }
+  .waviy span {
+    position: relative;
+    display: inline-block;
+    font-size: 40px;
+    color: #fff;
+    text-transform: uppercase;
+    animation: flip 2s infinite;
+    animation-delay: calc(.2s * var(--i))
+  }
+  @keyframes flip {
+    0%,80% {
+      transform: rotateY(360deg) 
+    }
+  }
 /*=======================MEDIA=====================================*/
 /*=======================MEDIA=====================================*/
 

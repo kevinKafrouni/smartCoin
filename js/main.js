@@ -16,30 +16,36 @@ const titleOptions = document.querySelectorAll('.title-option');
 
 titleOptions.forEach(title => {
   title.addEventListener('click', () => {
-    // Remove the 'selected' class from all titles
     titleOptions.forEach(title => {
       title.classList.remove('selected');
     });
-
-    // Add the 'selected' class only to the clicked title
     title.classList.add('selected');
   });
 });
 
 
 const editCategory = (categoryName) => {
-    // Encode the category name in case it contains special characters
     var encodedCategoryName = encodeURIComponent(categoryName);
     window.location.href = "edit-category.php?category=" + encodedCategoryName;
     Show('popup');
 }
 
 const addTransaction = (categoryName) => {
-    // Encode the category name in case it contains special characters
     var encodedCategoryName = encodeURIComponent(categoryName);
     window.location.href = "transaction-step2.php?category=" + encodedCategoryName;
     Show('popup');
 }
+
+/*=============================deleting==============================*/
+
+var deleteButton = document.getElementById("deleteButton");
+
+    deleteButton.addEventListener("click", function() {
+        var confirmation = confirm("Are you sure you want to delete your account?");
+        if (confirmation) {
+            window.location.href = "delete.php";
+        }
+    });
 
 
   });
@@ -121,10 +127,14 @@ function getTodayDateString() {
     const day = String(today.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
 }
-
-// Set the default value of the date input to today's date
 const dateInput = document.getElementById('dateInput');
 dateInput.value = getTodayDateString();
+
+
+
+
+
+
 
 /*=================statistics.html=======================*/
 

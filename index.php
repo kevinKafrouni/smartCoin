@@ -12,11 +12,12 @@
     </header>
 
     <?php 
+        $aid = $_SESSION['account-id'];
         $bquery = "SELECT t.`account-id`,
         SUM(CASE WHEN c.type='expenses' THEN -t.amount ELSE t.amount END) as `amount`
         FROM `transactions` t
         LEFT JOIN `categories` c on c.`category-id`=t.`category-id`
-        WHERE `account-id`='1' 
+        WHERE `account-id`='$aid' 
         GROUP BY t.`account-id`
         ";
 
@@ -25,6 +26,8 @@
             $mybalance = $balance['amount'];
         };
         $_SESSION['balance']= $mybalance;
+        $upbquery = "UPDATE `accounts` SET `balance` = '$mybalance' WHERE `account-id` = '$aid';";
+        $updatebalance = mysqli_query($connection,$upbquery);
     ?>
     <section class="balance-overview">
         <div class="balance">
